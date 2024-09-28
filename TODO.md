@@ -1,1 +1,3 @@
-- Brainstorm ideas
+- Frontend (React)
+- Backend
+- Database (MongoDB)
