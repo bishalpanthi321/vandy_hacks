@@ -49,7 +49,10 @@ export default function Sidebar() {
 
   return <div className="d-flex flex-column justify-content-between align-items-center h-100 p-2 bg-dark text-white" style={{ minWidth: "40ch" }}>
     <div>
-      <h2 class="mb-5"> Perplexity </h2>
+      <div class="d-flex flex-row align-items-center justify-content-evenly mb-5" >
+        <img src="logo.png" style={{ maxWidth: "30px" }} />
+        <h2> CiteMate </h2>
+      </div>
       <FileList />
     </div>
     <div class="d-flex flex-row gap-2">

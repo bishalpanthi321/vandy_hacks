@@ -31,7 +31,7 @@ function Suggestion() {
     network_request();
   }, [filesState, currentFileState, tokenState]);
 
-  return <span class="pt-5"> {suggestion.get()} </span>;
+  return <div className="pt-5" dangerouslySetInnerHTML={{ __html: suggestion.get() }} />
 }
 
 function PreviewOrSuggestions({ dataState, filesState, currentFileState }) {
