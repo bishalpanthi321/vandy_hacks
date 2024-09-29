@@ -1,5 +1,5 @@
-import store from '../store';
-export const server = "localhost:8000";
+import { store } from './../store';
+export const server = "http://localhost:8000";
 
 export function get_id(url) {
     return +url.split("/").reverse()[0];
@@ -41,9 +41,18 @@ export async function logout(token) {
 }
 
 export async function list_documents(token)  {
-    return await token_aware_fetch(`${server}/api/document`, {
+    let response = await token_aware_fetch(`${server}/api/document`, {
         "Content-Type": "application/json",
         "Authorization": `Token ${token}`,
     });
+    return await response.json();
+}
+
+export async function get_suggestion(token, document_id)  {
+    let response = await token_aware_fetch(`${server}/api/document/${document_id}/suggest`, {
+        "Content-Type": "application/json",
+        "Authorization": `Token ${token}`,
+    });
+    return await response.json();
 }
 

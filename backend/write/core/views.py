@@ -1,8 +1,11 @@
+from rest_framework.decorators import action
 from rest_framework import viewsets
 from rest_framework import mixins
+from rest_framework.response import Response
 
 from core.models import Document
 from core.serializers import DocumentSerialier
+from core.suggestion import suggest
 
 # Create your views here.
 class DocumentViewSet(
@@ -38,3 +41,9 @@ class DocumentViewSet(
         if self.request.user.is_superuser:
             return super().get_queryset()
         return Document.objects.filter(user=self.request.user.pk)
+
+    
+    @action(detail=True, methods=["get"])
+    def suggest(self, request, pk=None):
+        document = Document.objects.get(pk=pk)
+        return Response(suggest(document.data))

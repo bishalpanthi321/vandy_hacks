@@ -27,7 +27,6 @@ response = client.chat.completions.create(
     model="llama-3.1-sonar-small-128k-online",
     messages=messages,
 )
-print(response)
 
 # # chat completion with streaming
 # response_stream = client.chat.completions.create(

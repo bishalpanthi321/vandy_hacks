@@ -28,4 +28,5 @@ router.registry.extend(core_router.registry)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include((router.urls, "api"))),
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
 ]
