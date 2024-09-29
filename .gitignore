@@ -1,1 +1,4 @@
 .env
+*.pyc
+*.po
+db.sqlite3
