@@ -13,20 +13,18 @@ function FileListItem({ file, onDelete, currentFile, setCurrentFile }) {
     let icon;
 
     if (currentFile) {
-        icon = <button class="btn btn-light btn-sm rounded-circle" onClick={setCurrentFile}>
+        icon = <button className="btn btn-light btn-sm rounded-circle" onClick={setCurrentFile}>
             <FontAwesomeIcon icon={faEye} />
         </button>
     } else {
-        icon = <button class="btn btn-outline-light btn-sm rounded-circle" onClick={setCurrentFile}>
-            <FontAwesomeIcon icon={faEyeSlash} />
-        </button>
+        icon = null;
     }
 
-    return <div class="d-flex flex-row align-items-center justify-content-between py-1">
-        <span> {file.name} </span>
-        <div class="d-flex flex-row gap-2">
+    return <div className="d-flex flex-row align-items-center justify-content-between p-1 px-2 gap-5" style={{ background: currentFile ? "#474747": "initial" }}>
+        <span onClick={setCurrentFile}> {file.name} </span>
+        <div className="d-flex flex-row gap-2">
             {icon}
-            <button class="btn btn-outline-danger btn-sm rounded-circle" onClick={onDelete}>
+            <button className="btn btn-outline-danger btn-sm rounded-circle" onClick={onDelete}>
                 <FontAwesomeIcon icon={faTrash} />
             </button>
         </div>
@@ -56,10 +54,11 @@ function FileList() {
     let currentFileState = useHookstate(store.currentFile);
 
     const addFile = () => {
+        let filename = createNewFileName(filesState.get());
         filesState.set((files) => {
-            return [...files, { name: createNewFileName(files), content: "" }];
+            return [...files, { name: filename, content: "" }];
         })
-        //filesState.set(newFiles);
+        currentFileState.set(filename)
     }
 
     const removeFile = (name) => {
@@ -69,8 +68,9 @@ function FileList() {
             })
             currentFileState.set((currentFile) => {
                 if (currentFile == name) {
-                    currentFileState.set(null);
+                    return null;
                 }
+                return currentFile;
             })
         }
     }
@@ -82,8 +82,8 @@ function FileList() {
         setCurrentFile={() => { currentFileState.set(file.name) }}
     />)];
 
-    return <div class="d-flex flex-column">
-        <div class="d-flex flex-row align-items-center gap-2">
+    return <div className="d-flex flex-column">
+        <div className="d-flex flex-row align-items-center gap-2">
             <h3>
                 <FontAwesomeIcon icon={faFile} />
             </h3>
